@@ -1,5 +1,7 @@
 # focus
 
+**NOTE: Website is not complete yet**
+
 Focus is a website for helping people with productivity. It contains:
 
 - A Pomodoro timer (25 minutes for work and 5 minutes for break)
