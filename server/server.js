@@ -7,6 +7,11 @@ const app = express();
 
 app.use(cors());
 
+// starts server
+app.listen(process.env.PORT, () =>
+  console.log(`Server started. Listening on port ${process.env.PORT}.`)
+);
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(process.env.DATABASE_URI, {
   serverApi: {
@@ -30,7 +35,3 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-app.listen(process.env.PORT, () =>
-  console.log(`Server started. Listening on port ${process.env.PORT}.`)
-);
