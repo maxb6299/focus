@@ -19,14 +19,14 @@
         
 
 
-        <!-- <div>
+        <div>
             For Testing:
             <div>machine.remainingSeconds: {{ machine.remainingSeconds }}</div>
             <div>machine.timerMode: {{ machine.timerMode }}</div>
             <div>interface.minutes: {{ interface.minutes }}</div>
             <div>interface.seconds: {{ interface.seconds }}</div>
             <button @click="stop">Stop</button>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -52,7 +52,7 @@
                     breakMinutes: 3,
                     longBreakMinutes: 15,
 
-                    alarmSound: new Audio('/assets/alarm.mp3')              
+                    alarmSound: '/assets/alarm.mp3'             
                 }
                 
             }
@@ -103,7 +103,7 @@
 
                 this.cycleTimerMode();
                 
-                this.settings.alarmSound.play();
+                new Audio(this.settings.alarmSound).play();
             },
 
             cycleTimerMode() {
