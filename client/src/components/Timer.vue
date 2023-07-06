@@ -1,31 +1,33 @@
 <template>
-    <div class="timer">
-        {{ interface.minutes }} : {{interface.seconds}}
-        <div class="buttons">
-            <button @click="pause">Pause</button>
-            <button @click="play">Play</button>
-            <button @click="cycleTimerMode">Change Timer Mode</button>
-        </div>
-    </div>
-    
     <div>
-        <button @click="toggleSettings">Settings</button>
-            <form @submit.prevent="sendData" v-if="interface.showSettings">
-                Time For Work: <input v-model="settings.workMinutes"> <br>
-                Time For Break: <input v-model="settings.breakMinutes"> <br>
-        </form>
+        <div class="timer">
+            {{ interface.minutes }} : {{interface.seconds}}
+            <div class="buttons">
+                <button @click="pause">Pause</button>
+                <button @click="play">Play</button>
+                <button @click="cycleTimerMode">Change Timer Mode</button>
+            </div>
+        </div>
+        
+        <div>
+            <button @click="toggleSettings">Settings</button>
+                <form @submit.prevent="sendData" v-if="interface.showSettings">
+                    Time For Work: <input v-model="settings.workMinutes"> <br>
+                    Time For Break: <input v-model="settings.breakMinutes"> <br>
+            </form>
+        </div>
+        
+
+
+        <!-- <div>
+            For Testing:
+            <div>machine.remainingSeconds: {{ machine.remainingSeconds }}</div>
+            <div>machine.timerMode: {{ machine.timerMode }}</div>
+            <div>interface.minutes: {{ interface.minutes }}</div>
+            <div>interface.seconds: {{ interface.seconds }}</div>
+            <button @click="stop">Stop</button>
+        </div> -->
     </div>
-    
-
-
-    <!-- <div>
-        For Testing:
-        <div>machine.remainingSeconds: {{ machine.remainingSeconds }}</div>
-        <div>machine.timerMode: {{ machine.timerMode }}</div>
-        <div>interface.minutes: {{ interface.minutes }}</div>
-        <div>interface.seconds: {{ interface.seconds }}</div>
-        <button @click="stop">Stop</button>
-    </div> -->
 </template>
 
 <script>
