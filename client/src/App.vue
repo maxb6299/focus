@@ -8,7 +8,6 @@
 
 <script>
 import MusicPlayer from './components/MusicPlayer.vue'
-import Navbar from './components/Navbar.vue'
 import Timer from './components/Timer.vue'
 
 export default {
