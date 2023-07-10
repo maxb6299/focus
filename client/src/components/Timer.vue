@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="timer">
-            {{ interface.minutes }} : {{interface.seconds}}
+            {{ interface.timeString }}
             <div class="buttons">
                 <button @click="pause">Pause</button>
                 <button @click="play">Play</button>
-                <button @click="cycleTimerMode">Change Timer Mode</button>
+                <button @click="cycleTimerMode">Skip</button>
             </div>
         </div>
     </div>
@@ -24,8 +24,7 @@
                 },
 
                 interface: {
-                    minutes: '0',
-                    seconds: '0',
+                    timeString: ''
                 }                
             }
         },
@@ -35,8 +34,8 @@
                 const minutes = Math.floor(this.machine.remainingSeconds / 60);
                 const seconds = this.machine.remainingSeconds % 60;
 
-                this.interface.minutes = minutes.toString().padStart(2, "0");
-                this.interface.seconds = seconds.toString().padStart(2, "0");
+                this.interface.timeString = minutes.toString().padStart(2, "0")
+                          + ":" + seconds.toString().padStart(2, "0");
             },
 
             initialize() {
