@@ -2,7 +2,7 @@
   <div class="main">
     <div></div>
     <Settings @send-settings="saveSettings"></Settings>
-    <Timer></Timer>
+    <Timer :settings="settings.timerSettings"></Timer>
     <MusicPlayer></MusicPlayer>
   </div>
 </template>
