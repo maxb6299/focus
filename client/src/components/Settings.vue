@@ -1,0 +1,57 @@
+<template>
+    <div>
+        <button @click="toggleSettings">Settings</button>
+        <div v-if="viewSettings">
+            Timer: <form @submit.prevent="saveSettings">
+                        Time For Work: <input required v-model="formSettings.timerSettings.workMinutes" type="number" min="1" step="1"> <br>
+                        Time For Break: <input required v-model="formSettings.timerSettings.breakMinutes" type="number" min="1" step="1"> <br>
+                        
+                        <input type="submit" value="Save">
+                </form>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                viewSettings: false,
+
+                settings: {
+                    timerSettings: {
+                        workMinutes: 27,
+                        breakMinutes: 3,
+                        longBreakMinutes: 15,
+
+                        alarmSound: '/assets/alarm.mp3'
+                    }
+                },
+
+                formSettings: { timerSettings: { }}
+            }
+        },
+
+        methods: {
+            toggleSettings() {
+                this.viewSettings = !this.viewSettings;
+
+                let string = JSON.stringify(this.settings);
+                this.formSettings = JSON.parse(string);
+            },
+            saveSettings() {
+                let string = JSON.stringify(this.formSettings);
+                this.settings = JSON.parse(string);
+                
+                this.sendSettings();
+            },
+            sendSettings() {
+                this.$emit("send-settings", this.settings)
+            }
+        },
+
+        beforeMount() {
+            this.sendSettings();
+        }
+    }
+</script>

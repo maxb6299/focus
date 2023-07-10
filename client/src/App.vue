@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div></div>
+    <Settings @send-settings="saveSettings"></Settings>
     <Timer></Timer>
     <MusicPlayer></MusicPlayer>
   </div>
@@ -8,13 +9,28 @@
 
 <script>
 import MusicPlayer from './components/MusicPlayer.vue'
+import Settings from './components/Settings.vue'
 import Timer from './components/Timer.vue'
 
 export default {
   name: 'App',
   components: {
     MusicPlayer,
+    Settings,
     Timer
+  },
+  data() {
+    return {
+      settings: {
+        
+      }
+    }
+  },
+
+  methods: {
+    saveSettings(data) {
+      this.settings = data;
+    }
   }
 }
 </script>
