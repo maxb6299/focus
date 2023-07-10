@@ -13,6 +13,16 @@
                         v-model="formSettings.timerSettings.breakMinutes" 
                         type="number" min="1" step="1"
                         placeholder="5"> <br>
+
+                        Time For Long Break: <input required 
+                        v-model="formSettings.timerSettings.longBreakMinutes" 
+                        type="number" min="1" step="1"
+                        placeholder="5"> <br>
+
+                        Long Break Interval: <input required 
+                        v-model="formSettings.timerSettings.longBreakInterval" 
+                        type="number" min="1" step="1"
+                        placeholder="5"> <br>
             
                         Music: <br>
                         Music Link: <input required 
@@ -39,6 +49,8 @@
                         workMinutes: 27,
                         breakMinutes: 3,
                         longBreakMinutes: 15,
+
+                        longBreakInterval: 3,
 
                         alarmSound: '/assets/alarm.mp3'
                     }

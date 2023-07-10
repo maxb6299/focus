@@ -20,7 +20,8 @@
                 machine: {
                     interval: null,
                     remainingSeconds: 0,
-                    timerMode: 'work'
+                    timerMode: 'work',
+                    intervalCounter: 0
                 },
 
                 interface: {
@@ -79,8 +80,16 @@
 
             cycleTimerMode() {
                 if (this.machine.timerMode == "work") {
-                    this.machine.timerMode = "break";
-                } else if (this.machine.timerMode == "break") {
+                    this.machine.intervalCounter++;
+
+                    if (this.machine.intervalCounter % 
+                        this.settings.longBreakInterval != 0) {
+                        this.machine.timerMode = "break";
+                    } else {
+                        this.machine.timerMode = "longBreak"
+                    }
+                } else if (this.machine.timerMode == "break" 
+                        || this.machine.timerMode == "longBreak") {
                     this.machine.timerMode = "work";
                 }
 
