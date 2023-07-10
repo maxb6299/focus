@@ -99,6 +99,4 @@
             this.initialize();
         }
     }
-
-    
 </script>
