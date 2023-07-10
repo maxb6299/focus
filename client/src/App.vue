@@ -21,9 +21,7 @@ export default {
   },
   data() {
     return {
-      settings: {
-        
-      }
+      settings: {}
     }
   },
 
@@ -31,6 +29,10 @@ export default {
     saveSettings(data) {
       this.settings = data;
     }
+  },
+
+  created() {
+    document.title = "Focus";
   }
 }
 </script>
