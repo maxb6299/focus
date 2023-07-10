@@ -3,7 +3,7 @@
     <div></div>
     <Settings @send-settings="saveSettings"></Settings>
     <Timer :settings="settings.timerSettings"></Timer>
-    <MusicPlayer></MusicPlayer>
+    <MusicPlayer :settings="settings.musicSettings"></MusicPlayer>
   </div>
 </template>
 

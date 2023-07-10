@@ -2,12 +2,25 @@
     <div>
         <button @click="toggleSettings">Settings</button>
         <div v-if="viewSettings">
-            Timer: <form @submit.prevent="saveSettings">
-                        Time For Work: <input required v-model="formSettings.timerSettings.workMinutes" type="number" min="1" step="1"> <br>
-                        Time For Break: <input required v-model="formSettings.timerSettings.breakMinutes" type="number" min="1" step="1"> <br>
-                        
-                        <input type="submit" value="Save">
-                </form>
+            <form @submit.prevent="saveSettings">
+                        Timer: <br>
+                        Time For Work: <input required 
+                        v-model="formSettings.timerSettings.workMinutes" 
+                        type="number" min="1" step="1"
+                        placeholder="25"> <br>
+
+                        Time For Break: <input required 
+                        v-model="formSettings.timerSettings.breakMinutes" 
+                        type="number" min="1" step="1"
+                        placeholder="5"> <br>
+            
+                        Music: <br>
+                        Music Link: <input required 
+                        v-model="formSettings.musicSettings.musicLink" 
+                        type="url"
+                        placeholder="https://www.youtube.com/watch?v=Hlp6aawXVoY"><br>
+                <input type="submit" value="Save">
+            </form>
         </div>
     </div>
 </template>
@@ -19,6 +32,9 @@
                 viewSettings: false,
 
                 settings: {
+                    musicSettings: {
+                        musicLink: 'https://www.youtube.com/watch?v=Hlp6aawXVoY'
+                    },
                     timerSettings: {
                         workMinutes: 27,
                         breakMinutes: 3,
