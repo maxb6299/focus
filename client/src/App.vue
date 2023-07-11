@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div></div>
-    <Settings @send-settings="saveSettings"></Settings>
+    <Settings @get-cookie="getCookie"></Settings>
     <Timer :settings="settings.timerSettings"></Timer>
     <MusicPlayer :settings="settings.musicSettings"></MusicPlayer>
   </div>
@@ -26,8 +26,12 @@ export default {
   },
 
   methods: {
-    saveSettings(data) {
-      this.settings = data;
+    getCookie() {
+      let cookie = document.cookie;
+      let trimmedCookie = cookie.substring(9, cookie.length + 1);
+      let parsedData = JSON.parse(trimmedCookie);
+
+      this.settings = parsedData;
     }
   },
 
