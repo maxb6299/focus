@@ -43,5 +43,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        
+        background-color: white;
+        padding: 16px;
+        border-radius: 2px; 
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 </style>
