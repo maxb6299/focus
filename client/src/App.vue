@@ -49,7 +49,6 @@ export default {
 
   created() {
     document.title = "Focus";
-    this.getCookie();
   }
 }
 </script>

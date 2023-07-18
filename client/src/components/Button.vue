@@ -5,13 +5,11 @@
         @click="toggleButton" 
         :alt="buttonName">
 
-        <div v-if="isButtonOn">
-            <teleport to="#modals">
-                <div class="content">
-                    <slot></slot>
-                </div>
-            </teleport>
-        </div>
+        <teleport to="#modals">
+            <div v-show="isButtonOn" class="content">
+                <slot></slot>
+            </div>
+        </teleport>
     </div>
 </template>
 
