@@ -61,7 +61,15 @@ export default {
       let trimmedCookie = cookie.substring(9, cookie.length + 1);
       let parsedData = JSON.parse(trimmedCookie);
 
-      this.settings = parsedData;
+      if (parsedData.appSettings) {
+        this.settings.appSettings = parsedData.appSettings;
+      }
+      if (parsedData.musicSettings) {
+        this.settings.musicSettings = parsedData.musicSettings;
+      }
+      if (parsedData.timerSettings) {
+        this.settings.timerSettings = parsedData.timerSettings;
+      }
     }
   },
 
