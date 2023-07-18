@@ -1,11 +1,13 @@
 <template>
-    <img 
-    class="icon" :src="`/assets/icons/${this.buttonName}.png`"
-    @click="toggleButton" 
-    :alt="buttonName">
+    <div>
+        <img 
+        class="icon" :src="`/assets/icons/${this.buttonName}.png`"
+        @click="toggleButton" 
+        :alt="buttonName">
 
-    <div v-if="isButtonOn">
-        <slot></slot>
+        <div v-if="isButtonOn">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
