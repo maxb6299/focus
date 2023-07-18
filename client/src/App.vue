@@ -8,8 +8,8 @@
       <Button :buttonName="'Settings'"><Settings @get-cookie="getCookie"></Settings></Button>
     </div>
     
-    <Timer :settings="settings.timerSettings"></Timer>
-    <MusicPlayer :settings="settings.musicSettings"></MusicPlayer>
+    <Timer v-if="settings.appSettings.showTimer" :settings="settings.timerSettings"></Timer>
+    <MusicPlayer v-if="settings.appSettings.showMusic" :settings="settings.musicSettings"></MusicPlayer>
   </div>
 </template>
 
@@ -33,7 +33,25 @@ export default {
   },
   data() {
     return {
-      settings: {}
+      settings: {
+        appSettings: {
+          showMusic: true,
+          showNavbar: true,
+          showTimer: true,
+        },
+        musicSettings: {
+          musicLink: 'https://www.youtube.com/watch?v=Hlp6aawXVoY'
+        },
+        timerSettings: {
+          workMinutes: 25,
+          breakMinutes: 5,
+          longBreakMinutes: 15,
+
+          longBreakInterval: 3,
+
+          alarmSound: '/assets/alarm.mp3'
+        }
+      }
     }
   },
 
