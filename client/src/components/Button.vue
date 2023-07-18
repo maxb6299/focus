@@ -6,7 +6,11 @@
         :alt="buttonName">
 
         <div v-if="isButtonOn">
-            <slot></slot>
+            <teleport to="#modals">
+                <div class="content">
+                    <slot></slot>
+                </div>
+            </teleport>
         </div>
     </div>
 </template>
@@ -29,9 +33,15 @@
     }
 </script>
 
-<style>
+<style scoped>
     .icon { 
         width: 64px;
         height: 64px;
+    }
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
