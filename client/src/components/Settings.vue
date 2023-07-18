@@ -81,6 +81,8 @@
                 console.log(document.cookie)
 
                 this.sendSettings();
+
+                this.toggleSettings();
             },
             sendSettings() {
                 this.$emit("get-cookie")
