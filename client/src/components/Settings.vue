@@ -75,17 +75,25 @@ import { reactive } from 'vue';
         methods: {
             getCookie() {
                 let cookie = document.cookie;
-                let trimmedCookie = cookie.substring(9, cookie.length + 1);
-                let parsedData = JSON.parse(trimmedCookie);
-                
-                if (parsedData.appSettings) {
-                    this.settings.appSettings = parsedData.appSettings;
+
+                let settingsStartIndex = cookie.indexOf('settings=');
+                if (settingsStartIndex === -1) { return }
+                let settingsEndIndex = cookie.indexOf(';', settingsStartIndex);
+                if (settingsEndIndex === -1) { settingsEndIndex = cookie.length }
+
+                let settingsString = cookie.substring(settingsStartIndex + 9, settingsEndIndex);
+                let parsedSettings;
+                try { parsedSettings = JSON.parse(settingsString) }
+                catch (error) { return }
+
+                if (parsedSettings.appSettings) {
+                    this.settings.appSettings = parsedSettings.appSettings;
                 }
-                if (parsedData.musicSettings) {
-                    this.settings.musicSettings = parsedData.musicSettings;
+                if (parsedSettings.musicSettings) {
+                    this.settings.musicSettings = parsedSettings.musicSettings;
                 }
-                if (parsedData.timerSettings) {
-                    this.settings.timerSettings = parsedData.timerSettings;
+                if (parsedSettings.timerSettings) {
+                    this.settings.timerSettings = parsedSettings.timerSettings;
                 }
             },
             saveCookie(data) {
