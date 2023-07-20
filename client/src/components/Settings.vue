@@ -99,8 +99,7 @@ import { reactive } from 'vue';
             saveCookie(data) {
                 let dataString = JSON.stringify(data);
                 
-                document.cookie = "settings=" + dataString 
-                + "; expires= Sun, 1 January 2030 12:00:00 UTC; path=/";
+                document.cookie = `settings=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
             },
             saveSettings() {
                 this.saveCookie(this.settings);
