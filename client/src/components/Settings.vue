@@ -140,8 +140,7 @@ export default {
                 return null;
             }
         },
-
-        async sendCloudSettings() {
+        async saveCloudSettings() {
             const token = this.readCookie('id_token');
 
             const URL = 'http://localhost:3000/users/settings/';
