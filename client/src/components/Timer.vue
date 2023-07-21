@@ -54,12 +54,14 @@ export default {
         },
 
         play() {
-            this.machine.interval = setInterval(() => {
-                this.machine.remainingSeconds--;
-                this.updateInterfaceTime();
-                
-                if (this.machine.remainingSeconds == 0) this.stop();
-            }, 1000)
+            if (this.machine.interval == null) {
+                this.machine.interval = setInterval(() => {
+                    this.machine.remainingSeconds--;
+                    this.updateInterfaceTime();
+
+                    if (this.machine.remainingSeconds == 0) this.stop();
+                }, 1000)
+            }
         },
 
         pause() {
