@@ -90,36 +90,26 @@ export default {
             return parsedCookie;
         },
 
-        getCookie() {
-            let cookie = document.cookie;
+        getCookieSettings() {
+            const settingsCookie = this.readCookie('settings');
 
-            let settingsStartIndex = cookie.indexOf('settings=');
-            if (settingsStartIndex === -1) { return }
-            let settingsEndIndex = cookie.indexOf(';', settingsStartIndex);
-            if (settingsEndIndex === -1) { settingsEndIndex = cookie.length }
-
-            let settingsString = cookie.substring(settingsStartIndex + 9, settingsEndIndex);
-            let parsedSettings;
-            try { parsedSettings = JSON.parse(settingsString) }
-            catch (error) { return }
-
-            if (parsedSettings.appSettings) {
-                this.settings.appSettings = parsedSettings.appSettings;
+            if (settingsCookie.appSettings) {
+                this.settings.appSettings = settingsCookie.appSettings;
             }
-            if (parsedSettings.musicSettings) {
-                this.settings.musicSettings = parsedSettings.musicSettings;
+            if (settingsCookie.musicSettings) {
+                this.settings.musicSettings = settingsCookie.musicSettings;
             }
-            if (parsedSettings.timerSettings) {
-                this.settings.timerSettings = parsedSettings.timerSettings;
+            if (settingsCookie.timerSettings) {
+                this.settings.timerSettings = settingsCookie.timerSettings;
             }
         },
-        saveCookie(data) {
+        saveCookieSettings(data) {
             let dataString = JSON.stringify(data);
             
             document.cookie = `settings=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
         },
         saveSettings() {
-            this.saveCookie(this.settings);
+            this.saveCookieSettings(this.settings);
 
             this.sendSettings();
         },
@@ -179,9 +169,9 @@ export default {
 
     created() {
         if (document.cookie) {
-            this.getCookie();
+            this.getCookieSettings();
         } else {
-            this.saveCookie(this.settings);
+            this.saveCookieSettings(this.settings);
         }
 
         this.sendSettings();
