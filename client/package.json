@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "cors": "^2.8.5",
+    "vue": "^3.3.4",
+    "vue3-google-login": "^2.0.18"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
