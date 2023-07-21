@@ -73,6 +73,23 @@ export default {
     },
 
     methods: {
+        readCookie(name) {
+            let cookie = document.cookie;
+
+            let cookieStartIndex = cookie.indexOf(`${name}=`);
+            if (cookieStartIndex === -1) { return }
+            let cookieEndIndex = cookie.indexOf(';', cookieStartIndex);
+            if (cookieEndIndex === -1) { cookieEndIndex = cookie.length }
+
+            let cookieString = cookie.substring(cookieStartIndex + 9, cookieEndIndex);
+            let parsedCookie;
+            
+            try { parsedCookie = JSON.parse(cookieString) }
+            catch (error) { return null }
+
+            return parsedCookie;
+        },
+
         getCookie() {
             let cookie = document.cookie;
 
@@ -104,12 +121,59 @@ export default {
         saveSettings() {
             this.saveCookie(this.settings);
 
-            console.log(document.cookie)
-
             this.sendSettings();
         },
         sendSettings() {
             this.$emit("get-cookie")
+        },
+
+        async getCloudSettings() {
+            const token = this.readCookie('id_token');
+
+            const URL = `http://localhost:3000/users/settings/`;
+            try {
+                const response = await fetch(URL, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                })
+                if (!response.ok) {
+                    throw new Error("Error getting cloud settings");
+                }
+                
+                const cloudSettings = await response.json();
+                return cloudSettings;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        },
+
+        async sendCloudSettings() {
+            const token = this.readCookie('id_token');
+
+            const URL = 'http://localhost:3000/users/settings/';
+            const BODY = JSON.stringify({ settings: this.settings });
+            try {
+                const response = await fetch(URL, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: BODY
+                })
+                if (!response.ok) {
+                    throw new Error("Error updating cloud settings");
+                }
+                const cloudSettings = await response.json();
+                return cloudSettings;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
         }
     },
 
