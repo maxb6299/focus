@@ -3,15 +3,15 @@
 </template>
 
 <script>
-    export default {
-        props: ['settings'],
+export default {
+    props: ['settings'],
 
-        methods: {
-            configureYoutubeLink(link) {
-                const linkBase = "https://www.youtube-nocookie.com/embed/"
-                let configuredLink = linkBase + link.substring(32, 43)
-                return configuredLink;
-            }
+    methods: {
+        configureYoutubeLink(link) {
+            const linkBase = "https://www.youtube-nocookie.com/embed/"
+            let configuredLink = linkBase + link.substring(32, 43)
+            return configuredLink;
         }
     }
+}
 </script>

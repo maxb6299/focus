@@ -14,21 +14,21 @@
 </template>
 
 <script>
-    export default {
-        props: ['buttonName', 'isSmall'],
+export default {
+    props: ['buttonName', 'isSmall'],
 
-        data() {
-            return {
-                isButtonOn: false
-            }
-        },
-        
-        methods: {
-            toggleButton() {
-                this.isButtonOn = !this.isButtonOn;
-            }
+    data() {
+        return {
+            isButtonOn: false
+        }
+    },
+    
+    methods: {
+        toggleButton() {
+            this.isButtonOn = !this.isButtonOn;
         }
     }
+}
 </script>
 
 <style scoped>
