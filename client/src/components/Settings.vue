@@ -3,38 +3,38 @@
         <form @submit.prevent="saveSettings">
 
             <div>
-                Navbar: <input v-model="settings.appSettings.showNavbar" type="checkbox"> <br>
+                Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
             </div>    
  
             <div>
-                Timer: <input v-model="settings.appSettings.showTimer" type="checkbox"> <br>
+                Timer: <input v-model="newSettings.appSettings.showTimer" type="checkbox"> <br>
                 
                 Time For Work: <input required 
-                v-model="settings.timerSettings.workMinutes" 
+                v-model="newSettings.timerSettings.workMinutes" 
                 type="number" min="1" step="1"
                 placeholder="25"> <br>
 
                 Time For Break: <input required 
-                v-model="settings.timerSettings.breakMinutes" 
+                v-model="newSettings.timerSettings.breakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Time For Long Break: <input required 
-                v-model="settings.timerSettings.longBreakMinutes" 
+                v-model="newSettings.timerSettings.longBreakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Long Break Interval: <input required 
-                v-model="settings.timerSettings.longBreakInterval" 
+                v-model="newSettings.timerSettings.longBreakInterval" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
             </div>
         
             <div>
-                Music: <input v-model="settings.appSettings.showMusic" type="checkbox"> <br>
+                Music: <input v-model="newSettings.appSettings.showMusic" type="checkbox"> <br>
                 
                 Music Link: <input required 
-                v-model="settings.musicSettings.musicLink" 
+                v-model="newSettings.musicSettings.musicLink" 
                 type="url"
                 placeholder="https://www.youtube.com/watch?v=Hlp6aawXVoY"><br>
             </div>
@@ -45,12 +45,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
-
 export default {
     data() {
         return {
-            settings: reactive({
+            settings: {
                 appSettings: {
                     showMusic: true,
                     showNavbar: true,
@@ -68,18 +66,36 @@ export default {
 
                     alarmSound: '/assets/alarm.mp3'
                 }
-            })
+            }, 
+            newSettings: {}
         }
     },
 
     methods: {
+        getSettings() {
+            const SIGNED_IN = this.readCookie('id_token');
+
+            if (SIGNED_IN) this.getCloudSettings();
+            else this.getCookieSettings();
+        },
         saveSettings() {
             const SIGNED_IN = this.readCookie('id_token');
             
-            if (SIGNED_IN) this.saveCloudSettings();
-            else this.saveCookieSettings(this.settings);
+            if (SIGNED_IN) this.saveCloudSettings(this.newSettings);
+            else this.saveCookieSettings(this.newSettings);
 
-            this.sendSettings();
+            this.copySettings(this.newSettings);
+        },
+        copySettings(newSettings) {
+            if (newSettings.appSettings) {
+                this.settings.appSettings = newSettings.appSettings;
+            }
+            if (newSettings.musicSettings) {
+                this.settings.musicSettings = newSettings.musicSettings;
+            }
+            if (newSettings.timerSettings) {
+                this.settings.timerSettings = newSettings.timerSettings;
+            }
         },
         sendSettings() {
             this.$emit("get-cookie")
@@ -88,20 +104,12 @@ export default {
         getCookieSettings() {
             const settingsCookie = this.readCookie('settings');
 
-            if (settingsCookie.appSettings) {
-                this.settings.appSettings = settingsCookie.appSettings;
-            }
-            if (settingsCookie.musicSettings) {
-                this.settings.musicSettings = settingsCookie.musicSettings;
-            }
-            if (settingsCookie.timerSettings) {
-                this.settings.timerSettings = settingsCookie.timerSettings;
-            }
+            this.copySettings(settingsCookie);
         },
         saveCookieSettings(data) {
-            let dataString = JSON.stringify(data);
+            let settingsString = JSON.stringify(data);
             
-            document.cookie = `settings=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
+            document.cookie = `settings=${settingsString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
         },
 
         async getCloudSettings() {
@@ -121,17 +129,16 @@ export default {
                 }
                 
                 const cloudSettings = await response.json();
-                return cloudSettings;
+                this.copySettings(cloudSettings);
             } catch (error) {
                 console.error(error);
-                return null;
             }
         },
-        async saveCloudSettings() {
+        async saveCloudSettings(data) {
             const token = this.readCookie('id_token');
 
             const URL = 'http://localhost:3000/users/settings/';
-            const BODY = JSON.stringify({ settings: this.settings });
+            const BODY = JSON.stringify({ settings: data });
             try {
                 const response = await fetch(URL, {
                     method: 'POST',
@@ -171,13 +178,8 @@ export default {
     },
 
     created() {
-        if (document.cookie) {
-            this.getCookieSettings();
-        } else {
-            this.saveCookieSettings(this.settings);
-        }
-
-        this.sendSettings();
+        this.getSettings();
+        this.newSettings = this.settings;
     }
 }
 </script>
