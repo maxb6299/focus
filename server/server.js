@@ -9,6 +9,9 @@ app.use(express.json());
 const usersRoute = require("./routes/users");
 app.use("/users", usersRoute);
 
+const loginRoute = require("./routes/login");
+app.use("/login", loginRoute);
+
 const { getDatabase, connectToDatabase } = require("./database");
 connectToDatabase((err) => {
   if (!err) {
@@ -17,5 +20,7 @@ connectToDatabase((err) => {
     );
     const database = getDatabase();
     app.set("database", database);
+  } else {
+    console.log(`Error starting server ${err}`);
   }
 });
