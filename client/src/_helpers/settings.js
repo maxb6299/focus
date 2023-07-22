@@ -5,8 +5,11 @@ export default {
     const SIGNED_IN = cookieHelper.readCookie("id_token");
     const HAS_COOKIE = cookieHelper.readCookie("settings");
 
-    if (SIGNED_IN) return await this.getCloudSettings();
-    else if (HAS_COOKIE) return this.getCookieSettings();
+    if (SIGNED_IN) {
+      let settings = await this.getCloudSettings();
+      if (settings) return settings;
+      else return this.getDefaultSettings();
+    } else if (HAS_COOKIE) return this.getCookieSettings();
     else return this.getDefaultSettings();
   },
   async saveSettings(data) {
@@ -44,7 +47,7 @@ export default {
       const cloudSettings = await response.json();
       return cloudSettings;
     } catch (error) {
-      console.error(error);
+      console.error("Error getting cloud settings" + error);
       return null;
     }
   },
@@ -68,7 +71,7 @@ export default {
 
       return response.ok;
     } catch (error) {
-      console.error(error);
+      console.error("Error saving cloud settings" + error);
       return null;
     }
   },
