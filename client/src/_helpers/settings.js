@@ -1,5 +1,7 @@
 import cookieHelper from "./cookie.js";
 
+const URL = "http://localhost:3000/";
+
 export default {
   async getSettings() {
     const SIGNED_IN = cookieHelper.readCookie("id_token");
@@ -31,9 +33,9 @@ export default {
   async getCloudSettings() {
     const token = cookieHelper.readCookie("id_token");
 
-    const URL = `http://localhost:3000/users/settings/`;
+    const URI = `${URL}/users/settings/`;
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(URI, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -54,10 +56,10 @@ export default {
   async saveCloudSettings(data) {
     const token = cookieHelper.readCookie("id_token");
 
-    const URL = "http://localhost:3000/users/settings/";
+    const URI = `${URL}/users/settings/`;
     const BODY = JSON.stringify({ settings: data });
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(URI, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
