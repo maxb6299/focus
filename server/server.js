@@ -12,8 +12,8 @@ app.use("/users", usersRoute);
 const loginRoute = require("./routes/login");
 app.use("/login", loginRoute);
 
-app.get("/", (req, res) => {
-  res.json("This is the Focus backend");
+app.use((req, res) => {
+  res.status(400).send("Bad Request");
 });
 
 const { getDatabase, connectToDatabase } = require("./database");
