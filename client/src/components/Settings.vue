@@ -3,38 +3,38 @@
         <form @submit.prevent="saveSettings">
 
             <div>
-                Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
+                Navbar: <input v-model="settings.appSettings.showNavbar" type="checkbox"> <br>
             </div>    
  
             <div>
-                Timer: <input v-model="newSettings.appSettings.showTimer" type="checkbox"> <br>
+                Timer: <input v-model="settings.appSettings.showTimer" type="checkbox"> <br>
                 
                 Time For Work: <input required 
-                v-model="newSettings.timerSettings.workMinutes" 
+                v-model="settings.timerSettings.workMinutes" 
                 type="number" min="1" step="1"
                 placeholder="25"> <br>
 
                 Time For Break: <input required 
-                v-model="newSettings.timerSettings.breakMinutes" 
+                v-model="settings.timerSettings.breakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Time For Long Break: <input required 
-                v-model="newSettings.timerSettings.longBreakMinutes" 
+                v-model="settings.timerSettings.longBreakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Long Break Interval: <input required 
-                v-model="newSettings.timerSettings.longBreakInterval" 
+                v-model="settings.timerSettings.longBreakInterval" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
             </div>
         
             <div>
-                Music: <input v-model="newSettings.appSettings.showMusic" type="checkbox"> <br>
+                Music: <input v-model="settings.appSettings.showMusic" type="checkbox"> <br>
                 
                 Music Link: <input required 
-                v-model="newSettings.musicSettings.musicLink" 
+                v-model="settings.musicSettings.musicLink" 
                 type="url"
                 placeholder="https://www.youtube.com/watch?v=Hlp6aawXVoY"><br>
             </div>
@@ -45,6 +45,9 @@
 </template>
 
 <script>
+import settingsHelper from '../_helpers/settings.js'
+import cookieHelper from '../_helpers/cookie.js'
+
 export default {
     data() {
         return {
@@ -66,120 +69,30 @@ export default {
 
                     alarmSound: '/assets/alarm.mp3'
                 }
-            }, 
-            newSettings: {}
+            }
         }
     },
 
     methods: {
-        getSettings() {
-            const SIGNED_IN = this.readCookie('id_token');
+        async getSettings() {
+            const SIGNED_IN = cookieHelper.readCookie('id_token');
+            const HAS_COOKIE = cookieHelper.readCookie('settings')
 
-            if (SIGNED_IN) this.getCloudSettings();
-            else this.getCookieSettings();
+            if (SIGNED_IN) this.settings = await settingsHelper.getCloudSettings();
+            else if (HAS_COOKIE) this.settings = settingsHelper.getCookieSettings();
         },
-        saveSettings() {
-            const SIGNED_IN = this.readCookie('id_token');
+        async saveSettings() {
+            const SIGNED_IN = cookieHelper.readCookie('id_token');
             
-            if (SIGNED_IN) this.saveCloudSettings(this.newSettings);
-            else this.saveCookieSettings(this.newSettings);
+            if (SIGNED_IN) await settingsHelper.saveCloudSettings(this.settings);
+            else settingsHelper.saveCookieSettings(this.settings);
 
-            this.copySettings(this.newSettings);
-        },
-        copySettings(newSettings) {
-            if (newSettings.appSettings) {
-                this.settings.appSettings = newSettings.appSettings;
-            }
-            if (newSettings.musicSettings) {
-                this.settings.musicSettings = newSettings.musicSettings;
-            }
-            if (newSettings.timerSettings) {
-                this.settings.timerSettings = newSettings.timerSettings;
-            }
-        },
-        sendSettings() {
-            this.$emit("get-cookie")
-        },
-
-        getCookieSettings() {
-            const settingsCookie = this.readCookie('settings');
-
-            this.copySettings(settingsCookie);
-        },
-        saveCookieSettings(data) {
-            let settingsString = JSON.stringify(data);
-            
-            document.cookie = `settings=${settingsString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
-        },
-
-        async getCloudSettings() {
-            const token = this.readCookie('id_token');
-
-            const URL = `http://localhost:3000/users/settings/`;
-            try {
-                const response = await fetch(URL, {
-                    method: 'GET',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                })
-                if (!response.ok) {
-                    throw new Error("Error getting cloud settings");
-                }
-                
-                const cloudSettings = await response.json();
-                this.copySettings(cloudSettings);
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        async saveCloudSettings(data) {
-            const token = this.readCookie('id_token');
-
-            const URL = 'http://localhost:3000/users/settings/';
-            const BODY = JSON.stringify({ settings: data });
-            try {
-                const response = await fetch(URL, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-                    body: BODY
-                })
-                if (!response.ok) {
-                    throw new Error("Error updating cloud settings");
-                }
-                const cloudSettings = await response.json();
-                return cloudSettings;
-            } catch (error) {
-                console.error(error);
-                return null;
-            }
-        }, 
-
-        readCookie(name) {
-            let cookie = document.cookie;
-
-            let cookieStartIndex = cookie.indexOf(`${name}=`);
-            if (cookieStartIndex === -1) { return }
-            let cookieEndIndex = cookie.indexOf(';', cookieStartIndex);
-            if (cookieEndIndex === -1) { cookieEndIndex = cookie.length }
-
-            let cookieString = cookie.substring(cookieStartIndex + 9, cookieEndIndex);
-            let parsedCookie;
-
-            try { parsedCookie = JSON.parse(cookieString) }
-            catch (error) { return null }
-
-            return parsedCookie;
+            this.$emit("updated-settings");
         }
     },
 
-    created() {
-        this.getSettings();
-        this.newSettings = this.settings;
+    async mounted() {
+        await this.getSettings();
     }
 }
 </script>
