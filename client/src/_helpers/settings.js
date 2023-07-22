@@ -1,6 +1,6 @@
 import cookieHelper from "./cookie.js";
 
-const URL = "https://focus-backend.vercel.app/";
+const URL = "https://focus-backend.vercel.app";
 
 export default {
   async getSettings() {
