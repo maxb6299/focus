@@ -1,6 +1,6 @@
 import cookieHelper from "./cookie.js";
 
-const URL = "http://localhost:3000/";
+const URL = "https://focus-backend-z6ay.onrender.com";
 
 export default {
   async getSettings() {
