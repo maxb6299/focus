@@ -4,8 +4,8 @@
       <Button :buttonName="'Logo'"></Button>
       <Button :buttonName="'About'"><About></About></Button>
       <div style="width:64px; height:64px;"></div>
-      <Button :buttonName="'Account'"><Account></Account></Button>
-      <Button :buttonName="'Settings'"><Settings @get-cookie="getCookie"></Settings></Button>
+      <Button :buttonName="'Account'"><Account @signed-in-or-out="getSettings"></Account></Button>
+      <Button :buttonName="'Settings'"><Settings @updated-settings="getSettings"></Settings></Button>
     </div>
     
     <Timer v-if="settings.appSettings.showTimer" :settings="settings.timerSettings"></Timer>
@@ -20,6 +20,9 @@ import Button from './components/Button.vue'
 import MusicPlayer from './components/MusicPlayer.vue'
 import Settings from './components/Settings.vue'
 import Timer from './components/Timer.vue'
+
+import settingsHelper from './_helpers/settings.js'
+import cookieHelper from './_helpers/cookie.js'
 
 export default {
   name: 'App',
@@ -56,33 +59,18 @@ export default {
   },
 
   methods: {
-    getCookie() {
-      let cookie = document.cookie;
+    async getSettings() {
+      const SIGNED_IN = cookieHelper.readCookie('id_token');
+      const HAS_COOKIE = cookieHelper.readCookie('settings')
 
-      let settingsStartIndex = cookie.indexOf('settings=');
-      if (settingsStartIndex === -1) { return }
-      let settingsEndIndex = cookie.indexOf(';', settingsStartIndex);
-      if (settingsEndIndex === -1) { settingsEndIndex = cookie.length }
-
-      let settingsString = cookie.substring(settingsStartIndex + 9, settingsEndIndex);
-      let parsedSettings;
-      try { parsedSettings = JSON.parse(settingsString) } 
-      catch (error) { return }
-
-      if (parsedSettings.appSettings) {
-        this.settings.appSettings = parsedSettings.appSettings;
-      }
-      if (parsedSettings.musicSettings) {
-        this.settings.musicSettings = parsedSettings.musicSettings;
-      }
-      if (parsedSettings.timerSettings) {
-        this.settings.timerSettings = parsedSettings.timerSettings;
-      }
-    }
+      if (SIGNED_IN) this.settings = await settingsHelper.getCloudSettings();
+      else if (HAS_COOKIE) this.settings = settingsHelper.getCookieSettings();
+    },
   },
 
-  created() {
+  async created() {
     document.title = "Focus";
+    await this.getSettings();
   }
 }
 </script>
