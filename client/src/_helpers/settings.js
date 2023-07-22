@@ -1,6 +1,15 @@
 import cookieHelper from "./cookie.js";
 
 export default {
+  async getSettings() {
+    const SIGNED_IN = cookieHelper.readCookie("id_token");
+    const HAS_COOKIE = cookieHelper.readCookie("settings");
+
+    if (SIGNED_IN) return await this.getCloudSettings();
+    else if (HAS_COOKIE) return this.getCookieSettings();
+    else return this.getDefaultSettings();
+  },
+
   getCookieSettings() {
     const settingsCookie = cookieHelper.readCookie("settings");
     return settingsCookie;
@@ -56,5 +65,29 @@ export default {
       console.error(error);
       return null;
     }
+  },
+
+  getDefaultSettings() {
+    const settings = {
+      appSettings: {
+        showMusic: true,
+        showNavbar: true,
+        showTimer: true,
+      },
+      musicSettings: {
+        musicLink: "https://www.youtube.com/watch?v=Hlp6aawXVoY",
+      },
+      timerSettings: {
+        workMinutes: 25,
+        breakMinutes: 5,
+        longBreakMinutes: 15,
+
+        longBreakInterval: 3,
+
+        alarmSound: "/assets/alarm.mp3",
+      },
+    };
+
+    return settings;
   },
 };
