@@ -43,7 +43,7 @@ router.post("/settings", async (req, res) => {
         { upsert: true }
       );
 
-    console.log(userData.settings);
+    res.status(200).send("Success");
     console.log("Successfully updated user settings");
   } catch (error) {
     res.status(500).json({ error: "Error updating user settings" });
