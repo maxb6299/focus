@@ -9,6 +9,12 @@ export default {
     else if (HAS_COOKIE) return this.getCookieSettings();
     else return this.getDefaultSettings();
   },
+  async saveSettings(data) {
+    const SIGNED_IN = cookieHelper.readCookie("id_token");
+
+    if (SIGNED_IN) await this.saveCloudSettings(data);
+    else this.saveCookieSettings(data);
+  },
 
   getCookieSettings() {
     const settingsCookie = cookieHelper.readCookie("settings");
