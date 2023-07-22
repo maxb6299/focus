@@ -46,47 +46,18 @@
 
 <script>
 import settingsHelper from '../_helpers/settings.js'
-import cookieHelper from '../_helpers/cookie.js'
 
 export default {
     data() {
-        return {
-            settings: {
-                appSettings: {
-                    showMusic: true,
-                    showNavbar: true,
-                    showTimer: true,
-                },
-                musicSettings: {
-                    musicLink: 'https://www.youtube.com/watch?v=Hlp6aawXVoY'
-                },
-                timerSettings: {
-                    workMinutes: 25,
-                    breakMinutes: 5,
-                    longBreakMinutes: 15,
-
-                    longBreakInterval: 3,
-
-                    alarmSound: '/assets/alarm.mp3'
-                }
-            }
-        }
+        return { settings: settingsHelper.getDefaultSettings() }
     },
 
     methods: {
         async getSettings() {
-            const SIGNED_IN = cookieHelper.readCookie('id_token');
-            const HAS_COOKIE = cookieHelper.readCookie('settings')
-
-            if (SIGNED_IN) this.settings = await settingsHelper.getCloudSettings();
-            else if (HAS_COOKIE) this.settings = settingsHelper.getCookieSettings();
+            this.settings = await settingsHelper.getSettings();
         },
         async saveSettings() {
-            const SIGNED_IN = cookieHelper.readCookie('id_token');
-            
-            if (SIGNED_IN) await settingsHelper.saveCloudSettings(this.settings);
-            else settingsHelper.saveCookieSettings(this.settings);
-
+            settingsHelper.saveSettings(this.settings);
             this.$emit("updated-settings");
         }
     },
