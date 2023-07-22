@@ -6,6 +6,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 3000;
+
 const usersRoute = require("./routes/users");
 app.use("/users", usersRoute);
 
@@ -19,8 +21,8 @@ app.use((req, res) => {
 const { getDatabase, connectToDatabase } = require("./database");
 connectToDatabase((err) => {
   if (!err) {
-    app.listen(process.env.PORT, () =>
-      console.log(`Server started. Listening on port ${process.env.PORT}.`)
+    app.listen(PORT, () =>
+      console.log(`Server started. Listening on port ${PORT}.`)
     );
     const database = getDatabase();
     app.set("database", database);
