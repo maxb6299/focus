@@ -5,26 +5,35 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script>
+import cookieHelper from '../_helpers/cookie.js'
 
-var isSignedIn = ref(doesCookieExist());
+export default {
+    data() {
+        return {
+            isSignedIn: false,
+        }
+    },
+    methods: {
+        signOut() {
+            cookieHelper.deleteCookie('id_token');
 
-function doesCookieExist() {
-    return document.cookie.includes(`id_token=`);
-}
+            this.isSignedIn = false;
+            this.$emit("signed-in-or-out")
+        }, 
+        async signIn(response) {
+            let dataString = JSON.stringify(response.credential);
+            document.cookie = `id_token=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
 
-function signOut() {
-    document.cookie = `id_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            cookieHelper.deleteCookie('settings');
+            this.isSignedIn = true;
+            this.$emit("signed-in-or-out")
+        }
+    },
 
-    isSignedIn.value = false;
-}
-
-const signIn = async (response) => {
-        let dataString = JSON.stringify(response.credential);
-        document.cookie = `id_token=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
-
-        isSignedIn.value = true;
+    async created() {
+        this.isSignedIn = (cookieHelper.readCookie('id_token') != null)
+    }
 }
 </script>
 
