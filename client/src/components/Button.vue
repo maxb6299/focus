@@ -3,7 +3,7 @@
         <img class="icon" :src="`/assets/icons/${this.buttonName}.png`" @click="toggleButton" :alt="buttonName">
 
         <teleport to="#modals">
-            <div v-show="isButtonOn" class="content">
+            <div v-if="isButtonOn" class="content">
                 <slot></slot>
             </div>
         </teleport>
