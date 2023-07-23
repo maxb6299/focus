@@ -3,38 +3,38 @@
         <form @submit.prevent="saveSettings">
 
             <div>
-                Navbar: <input v-model="settings.appSettings.showNavbar" type="checkbox"> <br>
+                Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
             </div>    
  
             <div>
-                Timer: <input v-model="settings.appSettings.showTimer" type="checkbox"> <br>
+                Timer: <input v-model="newSettings.appSettings.showTimer" type="checkbox"> <br>
                 
                 Time For Work: <input required 
-                v-model="settings.timerSettings.workMinutes" 
+                v-model="newSettings.timerSettings.workMinutes" 
                 type="number" min="1" step="1"
                 placeholder="25"> <br>
 
                 Time For Break: <input required 
-                v-model="settings.timerSettings.breakMinutes" 
+                v-model="newSettings.timerSettings.breakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Time For Long Break: <input required 
-                v-model="settings.timerSettings.longBreakMinutes" 
+                v-model="newSettings.timerSettings.longBreakMinutes" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
 
                 Long Break Interval: <input required 
-                v-model="settings.timerSettings.longBreakInterval" 
+                v-model="newSettings.timerSettings.longBreakInterval" 
                 type="number" min="1" step="1"
                 placeholder="5"> <br>
             </div>
         
             <div>
-                Music: <input v-model="settings.appSettings.showMusic" type="checkbox"> <br>
+                Music: <input v-model="newSettings.appSettings.showMusic" type="checkbox"> <br>
                 
                 Music Link: <input required 
-                v-model="settings.musicSettings.musicLink" 
+                v-model="newSettings.musicSettings.musicLink" 
                 type="url"
                 placeholder="https://www.youtube.com/watch?v=Hlp6aawXVoY"><br>
             </div>
@@ -45,25 +45,28 @@
 </template>
 
 <script>
-import settingsHelper from '../_helpers/settings.js'
+import settingsHelper from "../_helpers/settings.js";
+import { useSettingsStore } from "../store/SettingsStore.js";
 
 export default {
     data() {
-        return { settings: settingsHelper.getDefaultSettings() }
+        return {
+            settingsStore: useSettingsStore(),
+            newSettings: settingsHelper.getDefaultSettings()
+        }
     },
-
     methods: {
         async getSettings() {
-            this.settings = await settingsHelper.getSettings();
+            const copiedSettings = JSON.parse(JSON.stringify(this.settingsStore.getSettings));
+            this.newSettings = copiedSettings;
         },
         async saveSettings() {
-            settingsHelper.saveSettings(this.settings);
-            this.$emit("updated-settings");
+            this.settingsStore.saveSettings(this.newSettings);
         }
     },
 
-    async mounted() {
-        await this.getSettings();
+    mounted() {
+        this.getSettings();
     }
 }
 </script>

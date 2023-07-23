@@ -12,8 +12,13 @@
 </template>
 
 <script>
+import { useSettingsStore } from "../store/SettingsStore.js";
+
 export default {
-    props: ['settings'],
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore }
+    },
 
     data() {
         return {
@@ -43,11 +48,11 @@ export default {
             this.pause();
             
             if (this.machine.timerMode == "work") {
-                this.machine.remainingSeconds = this.settings.workMinutes * 60;
+                this.machine.remainingSeconds = this.settingsStore.getTimerSettings.workMinutes * 60;
             } else if (this.machine.timerMode == "break") {
-                this.machine.remainingSeconds = this.settings.breakMinutes * 60;
+                this.machine.remainingSeconds = this.settingsStore.getTimerSettings.breakMinutes * 60;
             } else {
-                this.machine.remainingSeconds = this.settings.longBreakMinutes * 60;
+                this.machine.remainingSeconds = this.settingsStore.getTimerSettings.longBreakMinutes * 60;
             }
 
             this.updateInterfaceTime();
@@ -77,7 +82,7 @@ export default {
 
             this.cycleTimerMode();
             
-            new Audio(this.settings.alarmSound).play();
+            new Audio(this.settingsStore.getTimerSettings.alarmSound).play();
         },
 
         cycleTimerMode() {
@@ -85,7 +90,7 @@ export default {
                 this.machine.intervalCounter++;
 
                 if (this.machine.intervalCounter % 
-                    this.settings.longBreakInterval != 0) {
+                    this.settingsStore.getTimerSettings.longBreakInterval != 0) {
                     this.machine.timerMode = "break";
                 } else {
                     this.machine.timerMode = "longBreak"
@@ -98,11 +103,14 @@ export default {
             this.initialize();
         }
     },
-
+    
     watch: {
-        settings() {
-            this.initialize();
-        }
+        'settingsStore.getTimerSettings': {
+            deep: true,
+            handler() {
+                this.initialize();
+            },
+        },
     },
 
     beforeMount() {

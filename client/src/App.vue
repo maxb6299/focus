@@ -5,11 +5,12 @@
       <Button :buttonName="'About'"><About></About></Button>
       <div style="width:64px; height:64px;"></div>
       <Button :buttonName="'Account'"><Account @signed-in-or-out="getSettings"></Account></Button>
-      <Button :buttonName="'Settings'"><Settings @updated-settings="getSettings"></Settings></Button>
+      <Button :buttonName="'Settings'"><Settings></Settings></Button>
     </div>
     
-    <Timer v-if="settings.appSettings.showTimer" :settings="settings.timerSettings"></Timer>
-    <MusicPlayer v-if="settings.appSettings.showMusic" :settings="settings.musicSettings"></MusicPlayer>
+    <Timer v-if="this.settingsStore.getAppSettings.showTimer"></Timer>
+    <MusicPlayer v-if="this.settingsStore.getAppSettings.showMusic"></MusicPlayer>
+
   </div>
 </template>
 
@@ -21,7 +22,7 @@ import MusicPlayer from './components/MusicPlayer.vue'
 import Settings from './components/Settings.vue'
 import Timer from './components/Timer.vue'
 
-import settingsHelper from './_helpers/settings.js'
+import { useSettingsStore } from "./store/SettingsStore.js";
 
 export default {
   name: 'App',
@@ -33,19 +34,15 @@ export default {
     Settings,
     Timer
   },
-  data() {
-    return { settings: settingsHelper.getDefaultSettings() }
+  
+  setup() {
+    const settingsStore = useSettingsStore();
+    return { settingsStore }
   },
 
-  methods: {
-    async getSettings() {
-      this.settings = await settingsHelper.getSettings();
-    },
-  },
-
-  async created() {
+  created() {
     document.title = "Focus";
-    await this.getSettings();
+    this.settingsStore.updateSettings();
   }
 }
 </script>

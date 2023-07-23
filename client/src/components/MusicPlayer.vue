@@ -1,10 +1,14 @@
 <template>
-    <iframe width="400" :src=this.configureYoutubeLink(settings.musicLink)></iframe>
+    <iframe width="400" :src=this.configureYoutubeLink(this.settingsStore.getMusicSettings.musicLink)></iframe>
 </template>
 
 <script>
+import { useSettingsStore } from "../store/SettingsStore.js";
 export default {
-    props: ['settings'],
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore }
+    },
 
     methods: {
         configureYoutubeLink(link) {
