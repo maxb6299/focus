@@ -3,7 +3,7 @@
         <img class="icon" :src="`/assets/icons/${this.buttonName}.png`" @click="toggleButton" :alt="buttonName">
 
         <teleport to="#modals">
-            <div v-if="isButtonOn" class="content">
+            <div v-if="isModalOn" class="content">
                 <slot></slot>
             </div>
         </teleport>
@@ -16,13 +16,13 @@ export default {
 
     data() {
         return {
-            isButtonOn: false
+            isModalOn: false
         }
     },
 
     methods: {
         toggleButton() {
-            this.isButtonOn = !this.isButtonOn;
+            this.isModalOn = !this.isModalOn;
         }
     }
 }
