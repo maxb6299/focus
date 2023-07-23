@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="icon" :src="`/assets/icons/${this.buttonName}.png`" @click="toggleButton" :alt="buttonName">
+        <img class="icon" :src="`/assets/icons/${this.buttonName}.png`" @click="toggleModal" :alt="buttonName">
 
         <teleport to="#modals">
             <div v-if="isModalOn" class="content">
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    props: ['buttonName', 'isSmall'],
+    props: ['buttonName', 'isSmall', 'isModalAllowed'],
 
     data() {
         return {
@@ -21,7 +21,7 @@ export default {
     },
 
     methods: {
-        toggleButton() {
+        toggleModal() {
             this.isModalOn = !this.isModalOn;
         }
     }
