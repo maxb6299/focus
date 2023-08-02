@@ -1,10 +1,10 @@
 <template>
     <div class="navbar">
         <ButtonTemplate :buttonName="'Logo'" :isModalOn="false"></ButtonTemplate>
-        <ButtonTemplate :buttonName="'About'" :isModalOn="modalData.about.isModalOn" @toggleModal="toggleModal"><AboutMenu></AboutMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'About'" :isModalOn="modalData.about.isModalOn" @buttonClicked="toggleModal"><AboutMenu></AboutMenu></ButtonTemplate>
         <div style="width:64px; height:64px;"></div>
-        <ButtonTemplate :buttonName="'Account'" :isModalOn="modalData.account.isModalOn" @toggleModal="toggleModal"><AccountMenu></AccountMenu></ButtonTemplate>
-        <ButtonTemplate :buttonName="'Settings'" :isModalOn="modalData.settings.isModalOn" @toggleModal="toggleModal"><SettingsMenu @savedSettings="toggleModal('Settings')"></SettingsMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Account'" :isModalOn="modalData.account.isModalOn" @buttonClicked="toggleModal"><AccountMenu></AccountMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Settings'" :isModalOn="modalData.settings.isModalOn" @buttonClicked="toggleModal"><SettingsMenu @savedSettings="toggleModal('Settings')"></SettingsMenu></ButtonTemplate>
     </div>
 </template>
 
