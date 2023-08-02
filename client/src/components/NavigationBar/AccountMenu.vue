@@ -1,6 +1,6 @@
 <template>
     <div class="menu">
-        <GoogleLogin v-show="!isSignedIn" :callback="signIn" />
+        <GoogleLogin v-show="!isSignedIn" :callback="signIn"/>
         <button v-show="isSignedIn" @click="signOut">Sign out</button>
     </div>
 </template>
@@ -24,7 +24,7 @@ export default {
 
             this.settingsStore.updateSettings();
         }, 
-        async signIn(response) {
+        signIn(response) {
             let dataString = JSON.stringify(response.credential);
             document.cookie = `id_token=${dataString}; expires= Sun, 1 January 2030 12:00:00 UTC; path=/`
 
