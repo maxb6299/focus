@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import settingsHelper from "../_helpers/settings.js";
-import { useSettingsStore } from "../store/SettingsStore.js";
+import settingsHelper from "@/_helpers/settings.js";
+import { useSettingsStore } from "@/store/SettingsStore.js";
 
 export default {
     data() {

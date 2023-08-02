@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import cookieHelper from '../_helpers/cookie.js'
+import cookieHelper from '@/_helpers/cookie.js'
 
 export default {
     data() {
