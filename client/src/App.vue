@@ -4,7 +4,6 @@
     
     <Timer v-if="this.settingsStore.getAppSettings.showTimer"></Timer>
     <MusicPlayer v-if="this.settingsStore.getAppSettings.showMusic"></MusicPlayer>
-
   </div>
 </template>
 
