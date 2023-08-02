@@ -42,8 +42,4 @@ export default {
     align-items: center;
     gap: 150px
   }
-  .navbar {
-    display: flex;
-    gap: 16px;
-  }
 </style>

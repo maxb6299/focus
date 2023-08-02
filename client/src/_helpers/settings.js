@@ -1,4 +1,4 @@
-import cookieHelper from "./cookie.js";
+import cookieHelper from "@/_helpers/cookie.js";
 
 const URL = "https://focus-backend.vercel.app";
 

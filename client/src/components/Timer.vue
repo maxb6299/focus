@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { useSettingsStore } from "../store/SettingsStore.js";
+import { useSettingsStore } from "@/store/SettingsStore.js";
 
 export default {
     setup() {

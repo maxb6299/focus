@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { toRaw } from "vue";
-import settingsHelper from "../_helpers/settings.js";
+import settingsHelper from "@/_helpers/settings.js";
 
 export const useSettingsStore = defineStore("settingsStore", {
   state: () => {
