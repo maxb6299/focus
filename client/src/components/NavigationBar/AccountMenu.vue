@@ -7,8 +7,10 @@
 
 <script>
 import cookieHelper from '@/_helpers/cookie.js'
+import { useSettingsStore } from "@/store/SettingsStore.js";
 
 export default {
+        
     data() {
         return {
             isSignedIn: false,
@@ -19,7 +21,8 @@ export default {
             cookieHelper.deleteCookie('id_token');
 
             this.isSignedIn = false;
-            this.$emit("signed-in-or-out")
+
+            this.settingsStore.updateSettings();
         }, 
         async signIn(response) {
             let dataString = JSON.stringify(response.credential);
@@ -27,8 +30,14 @@ export default {
 
             cookieHelper.deleteCookie('settings');
             this.isSignedIn = true;
-            this.$emit("signed-in-or-out")
+
+            this.settingsStore.updateSettings();
         }
+    },
+
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore }
     },
 
     async created() {
