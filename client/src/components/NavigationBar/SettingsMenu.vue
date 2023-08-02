@@ -62,6 +62,7 @@ export default {
         },
         async saveSettings() {
             this.settingsStore.saveSettings(this.newSettings);
+            this.$emit('savedSettings')
         }
     },
 
