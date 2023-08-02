@@ -1,10 +1,10 @@
 <template>
     <div class="navbar">
-        <Button :buttonName="'Logo'"></Button>
-        <Button :buttonName="'About'"><AboutMenu></AboutMenu></Button>
+        <ButtonTemplate :buttonName="'Logo'"></ButtonTemplate>
+        <ButtonTemplate :buttonName="'About'"><AboutMenu></AboutMenu></ButtonTemplate>
         <div style="width:64px; height:64px;"></div>
-        <Button :buttonName="'Account'"><AccountMenu></AccountMenu></Button>
-        <Button :buttonName="'Settings'"><SettingsMenu></SettingsMenu></Button>
+        <ButtonTemplate :buttonName="'Account'"><AccountMenu></AccountMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Settings'"><SettingsMenu></SettingsMenu></ButtonTemplate>
     </div>
 </template>
 
