@@ -1,10 +1,10 @@
 <template>
     <div class="navbar">
-        <ButtonTemplate :buttonName="'Logo'"></ButtonTemplate>
-        <ButtonTemplate :buttonName="'About'"><AboutMenu></AboutMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Logo'" :isModalOn="false"></ButtonTemplate>
+        <ButtonTemplate :buttonName="'About'" :isModalOn="modalData.about.isModalOn" @toggleModal="toggleModal"><AboutMenu></AboutMenu></ButtonTemplate>
         <div style="width:64px; height:64px;"></div>
-        <ButtonTemplate :buttonName="'Account'"><AccountMenu></AccountMenu></ButtonTemplate>
-        <ButtonTemplate :buttonName="'Settings'"><SettingsMenu></SettingsMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Account'" :isModalOn="modalData.account.isModalOn" @toggleModal="toggleModal"><AccountMenu></AccountMenu></ButtonTemplate>
+        <ButtonTemplate :buttonName="'Settings'" :isModalOn="modalData.settings.isModalOn" @toggleModal="toggleModal"><SettingsMenu></SettingsMenu></ButtonTemplate>
     </div>
 </template>
 
@@ -20,6 +20,34 @@ export default {
         AboutMenu,
         AccountMenu,
         SettingsMenu
+    },
+
+    data() {
+      return {
+        modalData: {
+          about: { isModalOn: false },
+          account: { isModalOn: false },
+          settings: { isModalOn: false }
+        }
+      }
+    },
+
+    methods: {
+      toggleModal(buttonName) {
+        if (buttonName == "About") {
+          this.modalData.about.isModalOn = !this.modalData.about.isModalOn;
+          this.modalData.account.isModalOn = false;
+          this.modalData.settings.isModalOn = false;
+        } else if (buttonName == "Account") {
+          this.modalData.account.isModalOn = !this.modalData.account.isModalOn;
+          this.modalData.about.isModalOn = false;
+          this.modalData.settings.isModalOn = false;
+        } else if (buttonName == "Settings") {
+          this.modalData.settings.isModalOn = !this.modalData.settings.isModalOn;
+          this.modalData.about.isModalOn = false;
+          this.modalData.account.isModalOn = false;
+        }
+      }
     }
 }
 </script>
