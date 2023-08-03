@@ -1,5 +1,18 @@
-* {
+:root {
     color: black;
+    background-color: white;
+    
+    .dark {
+        color: white;
+        background-color: black;
+        img {
+            filter: invert(100%);
+        }
+    }
+}
+
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -19,12 +32,14 @@ body {
 }
 
 .background {
+    width: 1000px;
+    height: 100%;
+    
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 18px;
     padding-right: 18px;
-    width: 1000px;
-    height: 100%;
+    
     background-image: url("@/../public/assets/icons/Dot.png");
     background-size: 36px;
     background-position-y: 16px;
