@@ -45,10 +45,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.menu {
-    display: flex;
-    flex-direction: column;
-}
-</style>

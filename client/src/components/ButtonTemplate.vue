@@ -1,9 +1,9 @@
 <template>
     <div>
-        <img class="icon" :src="`/assets/icons/${this.buttonName}.png`" @click="emitClick" :alt="buttonName">
+        <img class="button-icon" :src="`/assets/icons/${this.buttonName}.png`" @click="emitClick" :alt="buttonName">
 
         <teleport to="#modals">
-            <div v-if="isModalOn" class="content">
+            <div v-if="isModalOn" class="button-content">
                 <slot></slot>
             </div>
         </teleport>
@@ -21,22 +21,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.icon {
-    width: 77px;
-    height: 77px;
-}
-
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    background-color: white;
-    padding: 16px;
-    border-radius: 2px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-</style>

@@ -38,30 +38,4 @@ export default {
 
 <style lang="scss">
 @import "@/assets/_shared.scss";
-  .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 150px;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .background {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 18px;
-    padding-right: 18px;
-    width: 1000px;
-    height: 100%;
-    background-image: url("@/../public/assets/icons/Dot.png");
-    background-size: 36px;
-    background-position-y: 16px;
-    background-position-x: 16px;
-    background-clip: content-box;
-  }
 </style>

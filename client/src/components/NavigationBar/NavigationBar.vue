@@ -51,10 +51,3 @@ export default {
     }
 }
 </script>
-
-<style>
-  .navbar {
-    display: flex;
-    gap: 30px;
-  }
-</style>
