@@ -2,7 +2,7 @@
     <div class="navbar">
         <ButtonTemplate :buttonName="'Logo'" :isModalOn="false"></ButtonTemplate>
         <ButtonTemplate :buttonName="'About'" :isModalOn="modalData.about.isModalOn" @buttonClicked="toggleModal"><AboutMenu></AboutMenu></ButtonTemplate>
-        <div style="width:64px; height:64px;"></div>
+        <div style="width:44px; height: auto;"></div>
         <ButtonTemplate :buttonName="'Account'" :isModalOn="modalData.account.isModalOn" @buttonClicked="toggleModal"><AccountMenu></AccountMenu></ButtonTemplate>
         <ButtonTemplate :buttonName="'Settings'" :isModalOn="modalData.settings.isModalOn" @buttonClicked="toggleModal"><SettingsMenu @savedSettings="toggleModal('Settings')"></SettingsMenu></ButtonTemplate>
     </div>
@@ -55,6 +55,6 @@ export default {
 <style>
   .navbar {
     display: flex;
-    gap: 16px;
+    gap: 30px;
   }
 </style>

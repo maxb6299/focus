@@ -24,8 +24,8 @@ export default {
 
 <style scoped>
 .icon {
-    width: 64px;
-    height: 64px;
+    width: 77px;
+    height: 77px;
 }
 
 .content {
