@@ -36,7 +36,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import "@/assets/_shared.scss";
   .main {
     display: flex;
     flex-direction: column;
