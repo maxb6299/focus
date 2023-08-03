@@ -3,7 +3,7 @@
         <img class="button-icon" :src="`/assets/icons/${this.buttonName}.png`" @click="emitClick" :alt="buttonName">
 
         <teleport to="#modals">
-            <div v-if="isModalOn" class="button-content">
+            <div v-if="isModalOn" class="button-content background">
                 <slot></slot>
             </div>
         </teleport>
