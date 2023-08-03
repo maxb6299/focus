@@ -81,6 +81,7 @@ export default {
   getDefaultSettings() {
     const settings = {
       appSettings: {
+        darkMode: false,
         showMusic: true,
         showNavbar: true,
         showTimer: true,

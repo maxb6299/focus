@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { computed, watch } from 'vue';
 import NavigationBar from '@/components/NavigationBar/NavigationBar.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import Timer from '@/components/Timer.vue'
@@ -23,9 +24,17 @@ export default {
     NavigationBar,
     Timer
   },
-  
+
   setup() {
     const settingsStore = useSettingsStore();
+
+    const isDarkMode = computed(() => settingsStore.getAppSettings.darkMode)
+    watch(isDarkMode, (newVal) => {
+      const body = document.querySelector('body');
+      if (newVal) body.classList.add('dark')
+      else body.classList.remove('dark')
+    });
+
     return { settingsStore }
   },
 

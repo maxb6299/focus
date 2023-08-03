@@ -3,6 +3,10 @@
         <form @submit.prevent="saveSettings">
 
             <div>
+                Dark Mode: <input v-model="newSettings.appSettings.darkMode" type="checkbox"> <br>
+            </div>
+
+            <div>
                 Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
             </div>    
  
