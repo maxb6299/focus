@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="button-icon">
         <img class="button-icon" :src="`/assets/icons/${this.buttonName}.png`" @click="emitClick" :alt="buttonName">
 
         <teleport to="#modals">

@@ -1,3 +1,5 @@
+$boxSize: 50px;
+
 :root {
     --textColor: black;
     --backgroundColor: white;
@@ -11,6 +13,15 @@
     }
 }
 
+#app{ 
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: $boxSize;
+}
 
 * {
     color: var(--textColor);
@@ -22,43 +33,45 @@
 
 body {
     background-color: var(--backgroundColor);
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .main {
+    padding: $boxSize * .05;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 150px;
-    width: 1000px;
+    gap: $boxSize * 2;
+    
+    width: 100%;
     height: 100%;
-
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 18px;
-    padding-right: 18px;
 }
 
 .background {
+    width: $boxSize * 15.10;
+
     background-color: var(--backgroundColor);
     background-image: url("@/../public/assets/icons/Dot.png");
-    background-size: 36px;
-    background-position-y: 16px;
-    background-position-x: 16px;
-    background-clip: border-box;
+    
+    background-size: $boxSize;
+    background-position-x: .05 * $boxSize;
+    background-position-y: .05 * $boxSize;
+    
+    background-clip: content-box;
 }
 
 .navbar {
     display: flex;
-    gap: 30px;
+    gap: $boxSize;
 }
 
 .button-icon {
-    width: 77px;
-    height: 77px;
+    width: $boxSize * 2;
+    height: $boxSize * 2;
 }
 
 .button-content {
@@ -81,19 +94,27 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    height: $boxSize * 6;
+    width: $boxSize * 10;
+
+    background-image: url("@/../public/assets/ThinBox.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 3px; // TODO 
 }
 
 .time {
-    font-size: 77px;
+    font-size: $boxSize * 2;
 }
 
 .timer-buttons {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: $boxSize;
 }
 
 .timer-button-icon {
-    width: 77px;
-    height: 77px;
+    width: $boxSize * 2;
+    height: $boxSize * 2;
 }
