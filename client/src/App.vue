@@ -3,8 +3,8 @@
     <div class="main">
       <NavigationBar></NavigationBar>
       
-      <Timer v-if="this.settingsStore.getAppSettings.showTimer"></Timer>
-      <MusicPlayer v-if="this.settingsStore.getAppSettings.showMusic"></MusicPlayer>
+      <Timer v-show="this.settingsStore.getAppSettings.showTimer"></Timer>
+      <MusicPlayer v-show="this.settingsStore.getAppSettings.showMusic"></MusicPlayer>
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@ import NavigationBar from '@/components/NavigationBar/NavigationBar.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import Timer from '@/components/Timer.vue'
 
+import cookieHelper from '@/_helpers/cookie.js'
 import { useSettingsStore } from "@/store/SettingsStore.js";
 
 export default {
@@ -41,6 +42,18 @@ export default {
   created() {
     document.title = "Focus";
     this.settingsStore.updateSettings();
+  },
+
+  errorCaptured(err, vm, info) {
+    console.error(err)
+
+    console.log("Deleting cookies")
+    cookieHelper.deleteCookie("id_token");
+    cookieHelper.deleteCookie("settings");
+
+    location.reload(); // refreshes page
+    
+    return false;
   }
 }
 </script>
