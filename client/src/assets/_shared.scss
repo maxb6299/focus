@@ -94,18 +94,21 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: $boxSize;
 
-    height: $boxSize * 6;
-    width: $boxSize * 10;
+    height: $boxSize * 5;
+    width: $boxSize * 7;
 
-    background-image: url("@/../public/assets/ThinBox.png");
+    background-image: url("@/../public/assets/WideBox.png");
     background-size: contain;
     background-repeat: no-repeat;
-    background-position-x: 3px; // TODO 
 }
 
 .time {
     font-size: $boxSize * 2;
+    height: $boxSize * 2;
+    width: fit-content;
+    margin-top: -1 * $boxSize * .3;
 }
 
 .timer-buttons {
