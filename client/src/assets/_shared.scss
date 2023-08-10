@@ -13,6 +13,12 @@ $boxSize: 50px;
         .timer {
             filter: invert(100%);
         }
+
+        .g-btn-wrapper {
+            * {
+                color: black;
+            }
+        }
     }
 }
 
