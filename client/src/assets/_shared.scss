@@ -80,6 +80,11 @@ body {
     background-clip: content-box;
 }
 
+.navbar-wrapper {
+    width: $boxSize * 11;
+    height: $boxSize * 2;
+}
+
 .navbar {
     display: flex;
     gap: $boxSize;
