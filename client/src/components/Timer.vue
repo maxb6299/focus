@@ -1,11 +1,13 @@
 <template>
-    <div class="timer">
-        <div class="time">{{ interface.timeString }}</div>
+    <div class="timer-outline">
+        <div class="timer">
+            <div class="time">{{ interface.timeString }}</div>
 
-        <div class="timer-buttons">
-            <img class="timer-button-icon" src="/assets/icons/Pause.png" v-show="machine.interval" @click="pause" alt="Pause">
-            <img class="timer-button-icon" src="/assets/icons/Play.png" v-show="!machine.interval" @click="play" alt="Play">
-            <img class="timer-button-icon" src="/assets/icons/Skip.png" @click="cycleTimerMode" alt="Skip">
+            <div class="timer-buttons">
+                <img class="timer-button-icon" src="/assets/icons/Pause.png" v-show="machine.interval" @click="pause" alt="Pause">
+                <img class="timer-button-icon" src="/assets/icons/Play.png" v-show="!machine.interval" @click="play" alt="Play">
+                <img class="timer-button-icon" src="/assets/icons/Skip.png" @click="cycleTimerMode" alt="Skip">
+            </div>
         </div>
     </div>
 </template>
