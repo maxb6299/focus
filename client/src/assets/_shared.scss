@@ -10,7 +10,9 @@ $boxSize: 50px;
     --backgroundColor: white;
 
     .show-dots {
-        background-image: url("@/../public/assets/icons/Dot.png");
+        .background {
+            background-image: url("@/../public/assets/icons/Dot.png");
+        }
     }
     
     .dark {
