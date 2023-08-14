@@ -36,6 +36,13 @@ export default {
       else body.classList.remove('dark')
     });
 
+    const isShowDots = computed(() => settingsStore.getAppSettings.showDots)
+    watch(isShowDots, (newVal) => {
+      const backgroundDiv = document.querySelector('div.background');
+      if (newVal) backgroundDiv.classList.add('show-dots')
+      else backgroundDiv.classList.remove('show-dots')
+    });
+
     return { settingsStore }
   },
 

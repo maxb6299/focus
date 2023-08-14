@@ -9,6 +9,10 @@ $boxSize: 50px;
     --textColor: black;
     --backgroundColor: white;
 
+    .show-dots {
+        background-image: url("@/../public/assets/icons/Dot.png");
+    }
+    
     .dark {
         --textColor: white;
         --backgroundColor: black;
@@ -78,7 +82,6 @@ body {
     height: 100%;
 
     background-color: var(--backgroundColor);
-    background-image: url("@/../public/assets/icons/Dot.png");
     
     background-size: $boxSize;
     background-position-x: .05 * $boxSize;

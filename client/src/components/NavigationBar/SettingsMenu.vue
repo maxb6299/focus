@@ -7,6 +7,10 @@
             </div>
 
             <div>
+                Dots: <input v-model="newSettings.appSettings.showDots" type="checkbox"> <br>
+            </div>
+
+            <div>
                 Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
             </div>    
  
