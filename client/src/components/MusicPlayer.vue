@@ -1,41 +1,21 @@
 <template>
-    <!-- <div>
-        <div v-show="!isPaused" id="player"></div>
-        <button @click="togglePlayback">{{ isPaused ? 'Play' : 'Pause' }}</button>
-    </div> -->
+    <iframe width="400" :src=this.configureYoutubeLink(this.settingsStore.getMusicSettings.musicLink)></iframe>
 </template>
 
 <script>
+import { useSettingsStore } from "@/store/SettingsStore.js";
 export default {
-    data() {
-        return {
-            isPaused: true,
-            player: null
-        };
+    setup() {
+        const settingsStore = useSettingsStore();
+        return { settingsStore }
     },
+
     methods: {
-        togglePlayback() {
-            if (this.isPaused) {
-                this.player = new window.YT.Player('player', {
-                    videoId: 'Hlp6aawXVoY', // Replace with the YouTube video ID you want to play
-                    events: {
-                        onReady: () => {
-                            this.player.playVideo();
-                        }
-                    }
-                });
-            } else {
-                this.player.pauseVideo();
-            }
-            this.isPaused = !this.isPaused;
+        configureYoutubeLink(link) {
+            const linkBase = "https://www.youtube-nocookie.com/embed/"
+            let configuredLink = linkBase + link.substring(32, 43)
+            return configuredLink;
         }
-    },
-    mounted() {
-        // Load YouTube Iframe Player API
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-};
+}
 </script>

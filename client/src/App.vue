@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { computed, watch } from 'vue';
+import { computed, watch, watchEffect } from 'vue';
 import NavigationBar from '@/components/NavigationBar/NavigationBar.vue'
 import MusicPlayer from '@/components/MusicPlayer.vue'
 import Timer from '@/components/Timer.vue'
@@ -29,19 +29,23 @@ export default {
   setup() {
     const settingsStore = useSettingsStore();
 
-    const isDarkMode = computed(() => settingsStore.getAppSettings.darkMode)
-    watch(isDarkMode, (newVal) => {
+    const isDarkMode = computed(() => settingsStore.getAppSettings.darkMode);
+    watchEffect(() => {
       const body = document.querySelector('body');
-      if (newVal) body.classList.add('dark')
-      else body.classList.remove('dark')
+      if (isDarkMode.value) {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
     });
 
-    const isShowDots = computed(() => settingsStore.getAppSettings.showDots)
-    watch(isShowDots, (newVal) => {
-      const backgroundDiv = document.querySelector('div.background');
-      if (newVal) backgroundDiv.classList.add('show-dots')
-      else backgroundDiv.classList.remove('show-dots')
+    const isShowDots = computed(() => settingsStore.getAppSettings.showDots);
+    watchEffect(() => {
+      const body = document.querySelector('body');
+      if (isShowDots.value) body.classList.add('show-dots');
+      else body.classList.remove('show-dots');
     });
+
 
     return { settingsStore }
   },
