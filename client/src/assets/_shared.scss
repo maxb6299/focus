@@ -1,5 +1,10 @@
 $boxSize: 50px;
 
+@font-face {
+    font-family: 'FocusFont';
+    src: url('@/assets/font.otf');
+}
+
 :root {
     --textColor: black;
     --backgroundColor: white;
@@ -34,6 +39,8 @@ $boxSize: 50px;
 }
 
 * {
+    font-family: 'FocusFont';
+    
     color: var(--textColor);
 
     padding: 0;
@@ -113,6 +120,11 @@ input {
     background-color: var(--backgroundColor);
 }
 
+.settings,
+input {
+    font-size: $boxSize * .75;
+}
+
 .timer-outline {
     background-image: url("@/../public/assets/WideBox.png");
     background-size: contain;
@@ -133,13 +145,14 @@ input {
     font-size: $boxSize * 2;
     height: $boxSize * 2;
     width: fit-content;
-    margin-top: -1 * $boxSize * .3;
 }
 
 .timer-buttons {
     display: flex;
     flex-direction: row;
     gap: $boxSize;
+
+    margin-top: -1 * $boxSize * .3;
 }
 
 .timer-button-icon {

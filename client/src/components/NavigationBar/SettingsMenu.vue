@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="settings">
         <form @submit.prevent="saveSettings">
 
             <div>
