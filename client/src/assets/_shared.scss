@@ -1,4 +1,12 @@
-$boxSize: 50px;
+:root {
+    --boxSize: 50px;
+}
+
+@media (max-width: 800px) {
+    :root {
+        --boxSize: 25px;
+    }
+}
 
 @font-face {
     font-family: 'FocusFont';
@@ -8,32 +16,31 @@ $boxSize: 50px;
 :root {
     --textColor: black;
     --backgroundColor: white;
+}
 
-    .show-dots {
-        .background {
-            background-image: url("@/../public/assets/icons/Dot.png");
-        }
+.show-dots .background {
+    background-image: url("@/../public/assets/icons/Dot.png");
+}
+
+.dark {
+    --textColor: white;
+    --backgroundColor: black;
+
+    img,
+    .timer-outline,
+    .timer {
+        filter: invert(100%);
     }
-    
-    .dark {
-        --textColor: white;
-        --backgroundColor: black;
-        
-        img,
-        .timer-outline,
-        .timer {
-            filter: invert(100%);
-        }
 
-        .g-btn-wrapper {
-            * {
-                color: black;
-            }
+    .g-btn-wrapper {
+        * {
+            color: black;
         }
     }
 }
 
-#app{ 
+
+#app {
     width: 100%;
     height: 100%;
 
@@ -41,12 +48,12 @@ $boxSize: 50px;
     flex-direction: column;
     align-items: center;
 
-    padding-top: $boxSize;
+    padding-top: var(--boxSize);
 }
 
 * {
     font-family: 'FocusFont';
-    
+
     color: var(--textColor);
 
     padding: 0;
@@ -68,43 +75,43 @@ body {
 }
 
 .main {
-    padding: $boxSize * .05;
-    
+    padding: calc(var(--boxSize) * 0.05);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $boxSize * 2;
-    
+    gap: calc(var(--boxSize) * 2);
+
     width: 100%;
     height: 100%;
 }
 
 .background {
-    width: $boxSize * 15.10;
+    width: calc(var(--boxSize) * 15.10);
     height: 100%;
 
     background-color: var(--backgroundColor);
-    
-    background-size: $boxSize;
-    background-position-x: .05 * $boxSize;
-    background-position-y: .05 * $boxSize;
-    
+
+    background-size: var(--boxSize);
+    background-position-x: calc(0.05 * var(--boxSize));
+    background-position-y: calc(0.05 * var(--boxSize));
+
     background-clip: content-box;
 }
 
 .navbar-wrapper {
-    width: $boxSize * 11;
-    height: $boxSize * 2;
+    width: calc(var(--boxSize) * 11);
+    height: calc(var(--boxSize) * 2);
 }
 
 .navbar {
     display: flex;
-    gap: $boxSize;
+    gap: var(--boxSize);
 }
 
 .button-icon {
-    width: $boxSize * 2;
-    height: $boxSize * 2;
+    width: calc(var(--boxSize) * 2);
+    height: calc(var(--boxSize) * 2);
 }
 
 .button-content {
@@ -127,7 +134,7 @@ input {
 
 .settings,
 input {
-    font-size: $boxSize * .75;
+    font-size: calc(var(--boxSize) * 0.75);
 }
 
 .timer-outline {
@@ -140,27 +147,27 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $boxSize;
+    gap: var(--boxSize);
 
-    height: $boxSize * 5;
-    width: $boxSize * 7;
+    height: calc(var(--boxSize) * 5);
+    width: calc(var(--boxSize) * 7);
 }
 
 .time {
-    font-size: $boxSize * 2;
-    height: $boxSize * 2;
+    font-size: calc(var(--boxSize) * 2);
+    height: calc(var(--boxSize) * 2);
     width: fit-content;
 }
 
 .timer-buttons {
     display: flex;
     flex-direction: row;
-    gap: $boxSize;
-
-    margin-top: -1 * $boxSize * .3;
+    gap: var(--boxSize);
+    
+    margin-top: calc(-1 * var(--boxSize) * 0.3);
 }
 
 .timer-button-icon {
-    width: $boxSize * 2;
-    height: $boxSize * 2;
+    width: calc(var(--boxSize) * 2);
+    height: calc(var(--boxSize) * 2);
 }
