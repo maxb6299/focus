@@ -17,7 +17,19 @@ export default {
     methods: {
         emitClick() {
             this.$emit('buttonClicked', this.buttonName)
+        },
+        handleKeyDown(event) {
+            if (event.key === 'Escape' && this.isModalOn) {
+                this.emitClick();
+            }
         }
+    },
+    
+    mounted() {
+        document.addEventListener('keydown', this.handleKeyDown);
+    },
+    beforeUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown);
     }
 }
 </script>
