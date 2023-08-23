@@ -47,7 +47,7 @@
                 placeholder="https://www.youtube.com/watch?v=Hlp6aawXVoY"><br>
             </div>
 
-            <input type="submit" value="Save">
+            <button type="submit" class="save-button">Save</button>
         </form>
     </div>
 </template>

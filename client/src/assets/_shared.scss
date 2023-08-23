@@ -27,9 +27,14 @@
     --backgroundColor: black;
 
     img,
+    .save-button,
     .timer-outline,
     .timer {
         filter: invert(100%);
+    }
+
+    .save-button {
+        color: var(--backgroundColor);
     }
 
     .g-btn-wrapper {
@@ -132,9 +137,18 @@ input {
     background-color: var(--backgroundColor);
 }
 
+.save-button,
 .settings,
 input {
     font-size: calc(var(--boxSize) * 0.75);
+}
+
+
+.save-button {
+    all: unset;
+    background-image: url("@/../public/assets/WideBox.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .timer-outline {
