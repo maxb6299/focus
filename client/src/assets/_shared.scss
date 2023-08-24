@@ -164,6 +164,7 @@ input {
 }
 .checkbox-wrapper {
     display: flex;
+    gap: calc(var(--boxSize) * .25);
     width: fit-content;
 }
 
