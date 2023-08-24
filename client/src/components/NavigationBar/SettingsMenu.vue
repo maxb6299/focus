@@ -2,20 +2,34 @@
     <div class="settings">
         <form @submit.prevent="saveSettings">
 
-            <div>
-                Dark Mode: <input v-model="newSettings.appSettings.darkMode" type="checkbox"> <br>
+            <div class="checkbox-wrapper">
+                Dark Mode: <label for="darkMode" class="checkbox-label">
+                    <input id="darkMode" v-model="newSettings.appSettings.darkMode" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.darkMode ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                </label>
             </div>
 
-            <div>
-                Dots: <input v-model="newSettings.appSettings.showDots" type="checkbox"> <br>
+            <div class="checkbox-wrapper">
+                Dots: <label for="showDots" class="checkbox-label">
+                    <input id="showDots" v-model="newSettings.appSettings.showDots" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.showDots ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                </label>
             </div>
 
-            <div>
-                Navbar: <input v-model="newSettings.appSettings.showNavbar" type="checkbox"> <br>
-            </div>    
+            <div class="checkbox-wrapper">
+                Navbar: <label for="showNavbar" class="checkbox-label">
+                    <input id="showNavbar" v-model="newSettings.appSettings.showNavbar" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.showNavbar ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                </label>
+            </div>   
  
             <div>
-                Timer: <input v-model="newSettings.appSettings.showTimer" type="checkbox"> <br>
+                <div class="checkbox-wrapper">
+                    Timer: <label for="showTimer" class="checkbox-label">
+                        <input id="showTimer" v-model="newSettings.appSettings.showTimer" type="checkbox" class="checkbox-input">
+                        <img :src="newSettings.appSettings.showTimer ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                    </label>
+                </div>
                 
                 Time For Work: <input required 
                 v-model="newSettings.timerSettings.workMinutes" 
@@ -39,7 +53,12 @@
             </div>
         
             <div>
-                Music: <input v-model="newSettings.appSettings.showMusic" type="checkbox"> <br>
+                <div class="checkbox-wrapper">
+                    Music Player: <label for="showMusic" class="checkbox-label">
+                        <input id="showMusic" v-model="newSettings.appSettings.showMusic" type="checkbox" class="checkbox-input">
+                        <img :src="newSettings.appSettings.showMusic ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                    </label>
+                </div>
                 
                 Music Link: <input required 
                 v-model="newSettings.musicSettings.musicLink" 
