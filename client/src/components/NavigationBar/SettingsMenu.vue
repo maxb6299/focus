@@ -1,11 +1,14 @@
 <template>
     <div class="settings">
         <form @submit.prevent="saveSettings">
+            Custom Color: <input 
+            v-model="newSettings.appSettings.backgroundColor" 
+            type="color"> <br>
 
             <div class="checkbox-wrapper">
-                Dark Mode: <label for="darkMode" class="checkbox-label">
-                    <input id="darkMode" v-model="newSettings.appSettings.darkMode" type="checkbox" class="checkbox-input">
-                    <img :src="newSettings.appSettings.darkMode ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                Light Text: <label for="lightText" class="checkbox-label">
+                    <input id="lightText" v-model="newSettings.appSettings.lightText" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.lightText ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
                 </label>
             </div>
 

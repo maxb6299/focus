@@ -29,13 +29,13 @@ export default {
   setup() {
     const settingsStore = useSettingsStore();
 
-    const isDarkMode = computed(() => settingsStore.getAppSettings.darkMode);
+    const isLightText = computed(() => settingsStore.getAppSettings.lightText);
     watchEffect(() => {
       const body = document.querySelector('body');
-      if (isDarkMode.value) {
-        body.classList.add('dark');
+      if (isLightText.value) {
+        body.classList.add('light-text');
       } else {
-        body.classList.remove('dark');
+        body.classList.remove('light-text');
       }
     });
 
@@ -46,6 +46,11 @@ export default {
       else body.classList.remove('show-dots');
     });
 
+    const backgroundColor = computed(() => settingsStore.getAppSettings.backgroundColor);
+    watchEffect(() => {
+      const element = document.querySelector('*');
+      element.style.setProperty('--backgroundColor', settingsStore.getAppSettings.backgroundColor);
+    });
 
     return { settingsStore }
   },
@@ -58,13 +63,13 @@ export default {
   errorCaptured(err, vm, info) {
     console.error(err)
 
-    console.log("Deleting cookies")
-    cookieHelper.deleteCookie("id_token");
-    cookieHelper.deleteCookie("settings");
+    // console.log("Deleting cookies")
+    // cookieHelper.deleteCookie("id_token");
+    // cookieHelper.deleteCookie("settings");
 
-    location.reload(); // refreshes page
+    // location.reload(); // refreshes page
     
-    return false;
+    // return false;
   }
 }
 </script>

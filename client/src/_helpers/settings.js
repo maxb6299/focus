@@ -81,7 +81,8 @@ export default {
   getDefaultSettings() {
     const settings = {
       appSettings: {
-        darkMode: false,
+        backgroundColor: "#000000",
+        lightText: false,
         showDots: true,
         showMusic: true,
         showNavbar: true,
