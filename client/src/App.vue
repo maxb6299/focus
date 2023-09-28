@@ -63,13 +63,13 @@ export default {
   errorCaptured(err, vm, info) {
     console.error(err)
 
-    // console.log("Deleting cookies")
-    // cookieHelper.deleteCookie("id_token");
-    // cookieHelper.deleteCookie("settings");
+    console.log("Deleting cookies")
+    cookieHelper.deleteCookie("id_token");
+    cookieHelper.deleteCookie("settings");
 
-    // location.reload(); // refreshes page
+    location.reload(); // refreshes page
     
-    // return false;
+    return false;
   }
 }
 </script>
