@@ -81,7 +81,7 @@ export default {
   getDefaultSettings() {
     const settings = {
       appSettings: {
-        backgroundColor: "#000000",
+        backgroundColor: "#FFFFFF",
         lightText: false,
         showDots: true,
         showMusic: true,
