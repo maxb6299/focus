@@ -1,6 +1,6 @@
 <template>
     <div class="settings">
-        <form @submit.prevent="saveSettings">
+        <form @submit.prevent="saveSettings" class="settings-form">
             <div class="checkbox-wrapper">
                 Toggle Theme: 
                 <label for="lightText" class="checkbox-label">
@@ -39,52 +39,49 @@
                 </label>
             </div>   
  
+            <div class="checkbox-wrapper">
+                Timer: <label for="showTimer" class="checkbox-label">
+                    <input id="showTimer" v-model="newSettings.appSettings.showTimer" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.showTimer ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                </label>
+            </div>
+
             <div>
-                <div class="checkbox-wrapper">
-                    Timer: <label for="showTimer" class="checkbox-label">
-                        <input id="showTimer" v-model="newSettings.appSettings.showTimer" type="checkbox" class="checkbox-input">
-                        <img :src="newSettings.appSettings.showTimer ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
-                    </label>
-                </div>
+                Time For Work: <input required 
+                v-model="newSettings.timerSettings.workMinutes" 
+                type="number" min="1" step="1"
+                placeholder="25"> <br>
+            </div>
 
-                <div>
+            <div>
+                Time For Break: <input required 
+                v-model="newSettings.timerSettings.breakMinutes" 
+                type="number" min="1" step="1"
+                placeholder="5"> <br>
+            </div>
 
-                    Time For Work: <input required 
-                    v-model="newSettings.timerSettings.workMinutes" 
-                    type="number" min="1" step="1"
-                    placeholder="25"> <br>
-                </div>
+            <div>
+                Time For Long Break: <input required 
+                v-model="newSettings.timerSettings.longBreakMinutes" 
+                type="number" min="1" step="1"
+                placeholder="5"> <br>
+            </div>
 
-                <div>
-                    Time For Break: <input required 
-                    v-model="newSettings.timerSettings.breakMinutes" 
-                    type="number" min="1" step="1"
-                    placeholder="5"> <br>
-                </div>
-
-                <div>
-                    Time For Long Break: <input required 
-                    v-model="newSettings.timerSettings.longBreakMinutes" 
-                    type="number" min="1" step="1"
-                    placeholder="5"> <br>
-                </div>
-
-                <div>
-                    Long Break Interval: <input required 
-                    v-model="newSettings.timerSettings.longBreakInterval" 
-                    type="number" min="1" step="1"
-                    placeholder="5"> <br>
-                </div>
+            <div>
+                Long Break Interval: <input required 
+                v-model="newSettings.timerSettings.longBreakInterval" 
+                type="number" min="1" step="1"
+                placeholder="5"> <br>
             </div>
         
+            <div class="checkbox-wrapper">
+                Music Player: <label for="showMusic" class="checkbox-label">
+                    <input id="showMusic" v-model="newSettings.appSettings.showMusic" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.showMusic ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
+                </label>
+            </div>
+            
             <div>
-                <div class="checkbox-wrapper">
-                    Music Player: <label for="showMusic" class="checkbox-label">
-                        <input id="showMusic" v-model="newSettings.appSettings.showMusic" type="checkbox" class="checkbox-input">
-                        <img :src="newSettings.appSettings.showMusic ? '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" alt="Checkbox" class="checkbox-image">
-                    </label>
-                </div>
-                
                 Music Link: <input required 
                 v-model="newSettings.musicSettings.musicLink" 
                 type="url"

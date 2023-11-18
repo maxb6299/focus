@@ -186,6 +186,16 @@ input {
     background-repeat: no-repeat;
 }
 
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.settings-form div {
+    height: var(--boxSize);
+}
+
 .timer-outline {
     background-image: url("@/../public/assets/WideBox.png");
     background-size: contain;
