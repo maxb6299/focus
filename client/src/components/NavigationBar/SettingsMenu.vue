@@ -1,10 +1,23 @@
 <template>
     <div class="settings">
         <form @submit.prevent="saveSettings">
-            Custom Color: <input 
-            v-model="newSettings.appSettings.backgroundColor" 
-            type="color"> <br>
-
+            <div class="checkbox-wrapper">
+                Toggle Theme: 
+                <label for="lightText" class="checkbox-label">
+                    <input id="lightText" @click="toggleTheme" type="checkbox" class="checkbox-input">
+                    <img :src="newSettings.appSettings.backgroundColor == '#FFFFFF' && 
+                               newSettings.appSettings.lightText == false ? 
+                               '/assets/icons/Checked.png' : '/assets/icons/Unchecked.png'" 
+                               alt="Checkbox" class="checkbox-image">
+                </label>
+            </div>
+            
+            <div>
+                Custom Color: <input 
+                v-model="newSettings.appSettings.backgroundColor" 
+                type="color"> <br>
+            </div>
+                
             <div class="checkbox-wrapper">
                 Light Text: <label for="lightText" class="checkbox-label">
                     <input id="lightText" v-model="newSettings.appSettings.lightText" type="checkbox" class="checkbox-input">
@@ -82,7 +95,7 @@ export default {
     data() {
         return {
             settingsStore: useSettingsStore(),
-            newSettings: settingsHelper.getDefaultSettings()
+            newSettings: settingsHelper.getDefaultSettings(),
         }
     },
     methods: {
@@ -93,6 +106,22 @@ export default {
         async saveSettings() {
             this.settingsStore.saveSettings(this.newSettings);
             this.$emit('savedSettings')
+        },
+        toggleTheme() {
+            if (this.newSettings.appSettings.backgroundColor == '#FFFFFF' &&
+                this.newSettings.appSettings.lightText == false) {
+                this.setDarkMode();
+            } else {
+                this.setLightMode();
+            }
+        },
+        setLightMode() {
+            this.newSettings.appSettings.backgroundColor = "#FFFFFF";
+            this.newSettings.appSettings.lightText = false;
+        },
+        setDarkMode() {
+            this.newSettings.appSettings.backgroundColor = "#000000";
+            this.newSettings.appSettings.lightText = true;
         }
     },
 
