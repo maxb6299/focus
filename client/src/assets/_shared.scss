@@ -63,6 +63,17 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
+    input {
+        border: none;
+        appearance: textfield;
+        background: transparent;
+
+    }
+    input[type="number"] {
+        width: calc(var(--boxSize));
+        height: calc(var(--boxSize));
+    }
 }
 
 html {
