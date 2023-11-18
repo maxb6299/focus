@@ -67,8 +67,7 @@
     input {
         border: none;
         appearance: textfield;
-        background: transparent;
-
+        background-color: transparent !important;
     }
     input[type="number"] {
         width: calc(var(--boxSize));
