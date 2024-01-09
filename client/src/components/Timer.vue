@@ -83,7 +83,27 @@ export default {
 
             this.cycleTimerMode();
             
+            this.notify();
+            
             new Audio(this.settingsStore.getTimerSettings.alarmSound).play();
+        },
+
+        notify() {
+            var message;
+
+            if (this.machine.timerMode == 'work') { message = 'Time for work!'}
+            else if (this.machine.timerMode == 'break') { message = 'Time for a break!'}                
+            else { message = 'Time for a long break!'}
+
+            if ('Notification' in window) {
+                Notification.requestPermission().then((permission) => {
+                    if (permission === 'granted') {
+                        new Notification('Timer Ended', {
+                            body: message,
+                        });
+                    }
+                });
+            }
         },
 
         cycleTimerMode() {
