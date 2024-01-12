@@ -2,6 +2,9 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";
 import vue3GoogleLogin from "vue3-google-login";
+import { inject } from "@vercel/analytics";
+
+inject(); // init vercel analytics
 
 const app = createApp(App);
 
