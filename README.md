@@ -1,6 +1,6 @@
 # focus
 
-Currently deployed at: https://focus-maxb6299.vercel.app/
+https://www.justfocus.me/
 
 Focus is a website for helping people with productivity. The goal was to make a minimal and distraction-free web application that still looked visually interesting. 
 
