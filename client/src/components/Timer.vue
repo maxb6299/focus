@@ -69,6 +69,7 @@ export default {
             this.machine.worker.onmessage = (message) => {
                 this.machine.remainingSeconds = message.data.remainingSeconds;
                 this.updateInterfaceTime();
+                 if (this.machine.remainingSeconds == 0) this.stop();
             }
         },
 
