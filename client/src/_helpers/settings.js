@@ -83,7 +83,7 @@ export default {
       appSettings: {
         backgroundColor: "#FFFFFF",
         lightText: false,
-        showDots: true,
+        showDots: false,
         showMusic: true,
         showNavbar: true,
         showTimer: true,
