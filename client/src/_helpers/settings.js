@@ -81,22 +81,22 @@ export default {
   getDefaultSettings() {
     const settings = {
       appSettings: {
-        backgroundColor: "#FFFFFF",
-        lightText: false,
+        backgroundColor: "#000000",
+        lightText: true,
         showDots: false,
-        showMusic: true,
-        showNavbar: true,
+        showMusic: false,
+        showNavbar: false,
         showTimer: true,
       },
       musicSettings: {
         musicLink: "https://www.youtube.com/watch?v=Hlp6aawXVoY",
       },
       timerSettings: {
-        workMinutes: 25,
-        breakMinutes: 5,
+        workMinutes: 27,
+        breakMinutes: 3,
         longBreakMinutes: 15,
 
-        longBreakInterval: 3,
+        longBreakInterval: 999,
 
         alarmSound: "/assets/alarm.mp3",
       },
